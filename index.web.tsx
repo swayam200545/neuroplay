@@ -120,8 +120,16 @@ export const useHandleScreenshotRequest = () => {
 const CreateAppWithFonts = () => {
   useHandleScreenshotRequest();
   return <CreateApp />;
+};
 
+try {
+  LoadSkiaWeb().catch((e) => {
+    console.warn("Skia web load warning:", e);
+  });
+} catch (e) {
+  console.warn("Skia web init error:", e);
 }
-LoadSkiaWeb().then(async () => {
-  renderRootComponent(CreateAppWithFonts)
-});
+
+renderRootComponent(CreateAppWithFonts);
+
+
